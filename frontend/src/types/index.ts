@@ -46,3 +46,17 @@ export interface AnswerResult {
   next_question: Question | null;
 }
 
+export interface ResumeAnalysis {
+  filename: string;
+  target_role: string;
+  overall_score: number;
+  verdict: string;
+  word_count: number;
+  category_scores: Record<string, number>;
+  contact_checks: Record<string, boolean>;
+  found_sections: string[];
+  missing_sections: string[];
+  detected_skills: string[];
+  strengths: string[];
+  improvements: string[];
+}

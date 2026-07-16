@@ -1,4 +1,4 @@
-import { ArrowRight, BarChart3, CalendarDays, Play, Sparkles, Target } from "lucide-react";
+import { ArrowRight, BarChart3, CalendarDays, FileSearch, Play, Sparkles, Target } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -72,7 +72,12 @@ export function DashboardPage() {
           </div>
         )}
       </section>
+
+      <Link to="/resume" className="resume-promo">
+        <span><FileSearch size={24} /></span>
+        <div><small>Before your next application</small><h2>Check your resume readiness</h2><p>Find missing sections, role-specific skill gaps, and weak achievement bullets.</p></div>
+        <strong>Analyze resume <ArrowRight size={17} /></strong>
+      </Link>
     </div>
   );
 }
-

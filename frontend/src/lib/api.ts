@@ -23,11 +23,12 @@ export async function api<T>(path: string, options: RequestInit = {}): Promise<T
     }
   }
 
+  const isFormData = options.body instanceof FormData;
   const response = await fetch(`${API_BASE}/api/v1${path}`, {
     ...options,
     credentials: "include",
     headers: {
-      ...(options.body ? { "Content-Type": "application/json" } : {}),
+      ...(options.body && !isFormData ? { "Content-Type": "application/json" } : {}),
       ...options.headers,
     },
   });

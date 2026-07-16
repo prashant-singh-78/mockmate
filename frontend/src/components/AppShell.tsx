@@ -1,4 +1,4 @@
-import { LayoutDashboard, LogOut, Plus, Settings } from "lucide-react";
+import { FileSearch, LayoutDashboard, LogOut, Plus, Settings } from "lucide-react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { Brand } from "./Brand";
 import { useAuth } from "../context/AuthContext";
@@ -19,6 +19,7 @@ export function AppShell() {
         <nav className="side-nav" aria-label="Main navigation">
           <NavLink to="/dashboard"><LayoutDashboard size={18} /> Overview</NavLink>
           <NavLink to="/practice"><Plus size={18} /> New interview</NavLink>
+          <NavLink to="/resume"><FileSearch size={18} /> Resume analyzer</NavLink>
           <span className="side-link-muted"><Settings size={18} /> Settings <small>Soon</small></span>
         </nav>
         <div className="side-profile">

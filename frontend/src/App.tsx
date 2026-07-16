@@ -6,6 +6,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 import { InterviewPage } from "./pages/InterviewPage";
 import { LandingPage } from "./pages/LandingPage";
 import { PracticeSetupPage } from "./pages/PracticeSetupPage";
+import { ResumeAnalyzerPage } from "./pages/ResumeAnalyzerPage";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route element={<AppShell />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/practice" element={<PracticeSetupPage />} />
+          <Route path="/resume" element={<ResumeAnalyzerPage />} />
         </Route>
         <Route path="/interview/:id" element={<InterviewPage />} />
       </Route>
@@ -24,4 +26,3 @@ export default function App() {
     </Routes>
   );
 }
-
