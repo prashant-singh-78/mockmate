@@ -8,6 +8,7 @@ from app.db.base import Base
 
 # Import all models here so Alembic can see them
 from app.models.interview import InterviewAnswer, InterviewSession  # noqa
+from app.models.skillproof import SkillAssessment  # noqa
 from app.models.user import User  # noqa
 
 config = context.config
@@ -46,4 +47,3 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
-

@@ -60,3 +60,81 @@ export interface ResumeAnalysis {
   strengths: string[];
   improvements: string[];
 }
+
+export interface SkillProofTest {
+  id: string;
+  label: string;
+  input: string;
+  expected: string | null;
+  expected_error: string | null;
+}
+
+export interface SkillProofTestResult {
+  id: string;
+  passed: boolean;
+  detail: string;
+}
+
+export interface SkillProofChallenge {
+  id: string;
+  title: string;
+  summary: string;
+  instructions: string[];
+  starter_code: string;
+  function_name: string;
+  tests: SkillProofTest[];
+  estimated_minutes: number;
+}
+
+export interface SkillScore {
+  name: string;
+  score: number;
+  status: "Verified" | "Demonstrated" | "Developing";
+}
+
+export interface SkillAssessmentSummary {
+  id: string;
+  role: string;
+  level: "entry" | "mid";
+  status: "challenge" | "viva" | "completed";
+  overall_score: number | null;
+  created_at: string;
+  completed_at: string | null;
+}
+
+export interface SkillAssessment extends SkillAssessmentSummary {
+  share_token: string;
+  job_description: string;
+  resume_skills: string[];
+  challenge: SkillProofChallenge;
+  test_results: SkillProofTestResult[];
+  code_score: number | null;
+  test_score: number | null;
+  viva_questions: string[];
+  viva_answers: Array<{ question: string; answer: string }>;
+  viva_score: number | null;
+  problem_solving_score: number | null;
+  skill_scores: SkillScore[];
+  evidence: string[];
+  improvements: string[];
+  evaluation_provider: "openai" | "deterministic";
+}
+
+export interface SkillSubmissionResult {
+  code_score: number;
+  test_score: number;
+  passed_tests: number;
+  total_tests: number;
+  feedback: string[];
+  ready_for_viva: boolean;
+}
+
+export interface PublicSkillPassport {
+  role: string;
+  level: string;
+  overall_score: number;
+  skill_scores: SkillScore[];
+  evidence: string[];
+  improvements: string[];
+  completed_at: string;
+}

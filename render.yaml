@@ -31,3 +31,7 @@ services:
         value: true
       - key: COOKIE_SAMESITE
         value: none
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-5.6-luna

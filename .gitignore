@@ -1,10 +1,12 @@
 # Frontend
-frontend/node_modules/
+frontend/node_modules*/
+frontend/node_modules
 frontend/dist/
 frontend/.env
 
 # Backend
 backend/.venv/
+backend/.*venv/
 backend/.env
 backend/__pycache__/
 backend/**/__pycache__/
@@ -19,4 +21,3 @@ backend/htmlcov/
 Thumbs.db
 .idea/
 .vscode/
-

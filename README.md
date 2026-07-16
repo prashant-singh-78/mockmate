@@ -1,15 +1,35 @@
 # Mockmate AI Interview Coach
 
-A deployment-ready starter for an AI interview coaching product. It includes a polished React frontend, a FastAPI API, secure cookie authentication, persistent interview sessions, a deterministic coaching fallback, and clear extension points for a real LLM.
+A deployment-ready AI career coaching product. It includes interview practice, resume analysis, and SkillProof: a practical coding assessment that turns resume claims into reviewable evidence and a shareable Skill Passport.
 
 ## What is included
 
 - Landing page, registration, login, protected dashboard, practice setup, live interview, and results
+- SkillProof setup, browser-isolated Python challenge, behavior tests, technical viva, history, and shareable evidence passport
+- Optional OpenAI Responses API evaluation with a deterministic fallback when no API key is configured
 - Argon2 password hashing and short-lived JWTs stored in HTTP-only cookies
 - SQLite for local development and PostgreSQL-ready SQLAlchemy models for production
 - Alembic database migration, typed API schemas, health check, and backend tests
 - Vercel SPA configuration, Render blueprint, Dockerfiles, and local Docker Compose
 - A provider boundary where an LLM-based evaluator can replace the built-in deterministic coach
+
+## SkillProof flow
+
+```text
+Resume skills + target role
+        ↓
+Curated Python API challenge
+        ↓
+Browser-isolated behavior tests (Pyodide Web Worker)
+        ↓
+Server-side static code review
+        ↓
+Three-question voice/text technical viva
+        ↓
+Evidence-weighted Skill Passport + public share link
+```
+
+Assessment weights are behavior tests 40%, code quality 20%, technical viva 25%, and problem solving 15%. User code is not executed by the FastAPI server. The browser worker blocks imports and dynamic execution, and the backend independently performs an AST-based static safety review.
 
 ## Project structure
 
@@ -66,6 +86,8 @@ npm run dev
 
 Open `http://localhost:5173`. The Vite development proxy forwards `/api` to the backend.
 
+Open `http://localhost:5173/skillproof` after signing in to run the SkillProof flow.
+
 ## Run with Docker
 
 ```bash
@@ -99,10 +121,24 @@ Never commit `.env` files. Generate a strong backend secret with:
 python -c "import secrets; print(secrets.token_urlsafe(48))"
 ```
 
+For AI-evaluated viva feedback, set these backend variables:
+
+```bash
+OPENAI_API_KEY=your-server-side-key
+OPENAI_MODEL=gpt-5.6-luna
+```
+
+Never expose `OPENAI_API_KEY` through a `VITE_` variable or commit it to Git. Without a key, SkillProof uses its tested deterministic evaluator, so local development and the demo flow still work.
+
+## SkillProof limitations
+
+- A Skill Passport is practice evidence from one controlled task, not identity verification or an employment certification.
+- Voice dictation uses the browser speech-recognition capability when available; typing is always supported.
+- The Pyodide runtime is downloaded from jsDelivr on the first test run. A strict production CSP must allow that CDN or self-host the pinned runtime.
+
 ## Quality checks
 
 ```bash
 cd frontend && npm run lint && npm run build
 cd backend && ruff check . && pytest
 ```
-

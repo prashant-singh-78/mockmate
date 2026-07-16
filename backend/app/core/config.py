@@ -1,3 +1,4 @@
+import secrets
 from functools import lru_cache
 from typing import Literal
 
@@ -11,11 +12,14 @@ class Settings(BaseSettings):
     app_name: str = "Mockmate API"
     app_env: Literal["development", "test", "production"] = "development"
     database_url: str = "sqlite:///./mockmate.db"
-    secret_key: str = "development-only-secret-change-me"
+    secret_key: str = Field(default_factory=lambda: secrets.token_urlsafe(48), min_length=32)
     frontend_url: str = "http://localhost:5173"
     access_token_minutes: int = Field(default=30, ge=5, le=1440)
     cookie_secure: bool = False
     cookie_samesite: Literal["lax", "strict", "none"] = "lax"
+    openai_api_key: str | None = None
+    openai_model: str = "gpt-5.6-luna"
+    openai_timeout_seconds: float = Field(default=20, ge=3, le=60)
 
     @field_validator("database_url")
     @classmethod
@@ -37,4 +41,3 @@ def get_settings() -> Settings:
 
 
 settings = get_settings()
-

@@ -1,4 +1,4 @@
-import { ArrowRight, BarChart3, CalendarDays, FileSearch, Play, Sparkles, Target } from "lucide-react";
+import { ArrowRight, BadgeCheck, BarChart3, CalendarDays, FileSearch, Play, Sparkles, Target } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -73,11 +73,18 @@ export function DashboardPage() {
         )}
       </section>
 
-      <Link to="/resume" className="resume-promo">
-        <span><FileSearch size={24} /></span>
-        <div><small>Before your next application</small><h2>Check your resume readiness</h2><p>Find missing sections, role-specific skill gaps, and weak achievement bullets.</p></div>
-        <strong>Analyze resume <ArrowRight size={17} /></strong>
-      </Link>
+      <div className="dashboard-promos">
+        <Link to="/skillproof" className="resume-promo skillproof-promo">
+          <span><BadgeCheck size={24} /></span>
+          <div><small>New · Build Week project</small><h2>Prove your Python skills</h2><p>Complete a practical challenge, defend your decisions, and earn a shareable evidence passport.</p></div>
+          <strong>Start SkillProof <ArrowRight size={17} /></strong>
+        </Link>
+        <Link to="/resume" className="resume-promo">
+          <span><FileSearch size={24} /></span>
+          <div><small>Before your next application</small><h2>Check your resume readiness</h2><p>Find missing sections, role-specific skill gaps, and weak achievement bullets.</p></div>
+          <strong>Analyze resume <ArrowRight size={17} /></strong>
+        </Link>
+      </div>
     </div>
   );
 }
